@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "re-learn-angular-router"
+    }
+  },
+  "defaultProject": "re-learn-angular-router",
+  "cli": {
+    "analytics": false
+  }
 }
