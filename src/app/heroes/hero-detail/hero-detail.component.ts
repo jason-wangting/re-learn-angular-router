@@ -15,14 +15,17 @@ export class HeroDetailComponent implements OnInit {
   hero$: Observable<Hero>;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private service: HeroService
   ) {}
 
 
   ngOnInit() {
-    this.hero$ = this.route.paramMap.pipe(
+    // 这里使用observable的原因是在组件存在的生命周期里，route的参数可能发生变化
+    // 比如在application页面，可以切换application，这时，只是改变路由的参数application id的值，angular为了性能考虑
+    // 默认情况下是复用之前的组件，只是修改了参数，这时组件不会被重新加载，ngOnint也不会被调用，所以要想取得这些路由参数，使用observable订阅比较合适
+    this.hero$ = this.activatedRoute.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.service.getHero(params.get('id')))
     );

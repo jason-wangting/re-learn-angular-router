@@ -4,7 +4,19 @@
   <!-- <a routerLink="crisis-center" routerLinkActive="active">Crisis Center</a> -->
   <!-- <a routerLink="./crisis-center" routerLinkActive="active">Crisis Center</a> -->
   <!-- 另外，需要注意的是，angular对于相同path的路由，不会重新加载，这是在一个guard中判断的？ -->
-  <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+  <a routerLink="" routerLinkActive="active">Crisis Center</a>
   <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+  <a routerLink="/admin" routerLinkActive="active">Admin</a>
+  <!-- 虽然 compose 路由被配置到了 popup 出口上，但这仍然不足以把该路由和 RouterLink 指令联系起来。 你还要在链接参数数组中指定这个命名出口，并通过属性绑定的形式把它绑定到 RouterLink 上。
+
+链接参数数组包含一个只有一个 outlets 属性的对象，它的值是另一个对象，这个对象以一个或多个路由的出口名作为属性名。 在这里，它只有一个出口名“popup”，它的值则是另一个链接参数数组，用于指定 compose 路由。 -->
+<a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
 </nav>
-<router-outlet></router-outlet>
+
+<!-- 要想使用路由动画，就要把 RouterOutlet 包装到一个元素中。再把 @routeAnimation 触发器绑定到该元素上。 -->
+<!-- <router-outlet></router-outlet> -->
+<!-- 为了把 @routeAnimation 转场转场到指定的状态，你需要从 ActivatedRoute 的 data 中提供它。 RouterOutlet 导出成了一个模板变量 outlet，这样你就可以绑定一个到路由出口的引用了。这个例子中使用了一个 routerOutlet 变量。 -->
+<div [@routeAnimation]="getAnimationData(routeroutlet)">
+  <router-outlet #routeroutlet="outlet"></router-outlet>
+</div>
+<router-outlet name="popup"></router-outlet>
