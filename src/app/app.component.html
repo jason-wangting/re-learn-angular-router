@@ -4,7 +4,8 @@
   <!-- <a routerLink="crisis-center" routerLinkActive="active">Crisis Center</a> -->
   <!-- <a routerLink="./crisis-center" routerLinkActive="active">Crisis Center</a> -->
   <!-- 另外，需要注意的是，angular对于相同path的路由，不会重新加载，这是在一个guard中判断的？ -->
-  <a routerLink="" routerLinkActive="active">Crisis Center</a>
+  <!-- { exact: true }这个选项的意思是只有完全匹配这个path时这个route才激活，否则不设置这个属性时它永远都是激活状态，因为它是空路由 -->
+  <a routerLink="/crisis-center" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >Crisis Center</a>
   <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
   <a routerLink="/admin" routerLinkActive="active">Admin</a>
   <!-- 虽然 compose 路由被配置到了 popup 出口上，但这仍然不足以把该路由和 RouterLink 指令联系起来。 你还要在链接参数数组中指定这个命名出口，并通过属性绑定的形式把它绑定到 RouterLink 上。

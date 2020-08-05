@@ -3,7 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 // import { CrisisListComponent } from './crisis-center/crisis-list/crisis-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ComposeMessageComponent } from './compose-message/compose-message.component';
+import { LoginComponent } from './auth/login/login.component';
 const appRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'compose',
     component: ComposeMessageComponent,
@@ -19,7 +24,7 @@ const appRoutes: Routes = [
   // 但是，一般来说，习惯上还是使用 /heroes, 即可以与path的 heroes区分开来，又可以少写字符。
 
   // 这里连续重定向有问题，在加载localhost:4200会加载重定向到localhost:4200/heroes, 并没有再次重定向到superheroes
-  { path: '', redirectTo: './heroes', pathMatch: 'full'},
+  { path: '', redirectTo: './crisis-center', pathMatch: 'full'},
   // 路由器会使用先到先得的策略来选择路由。 由于通配符路由是最不具体的那个，因此务必确保它是路由配置中的最后一个路由。
   { path: '**', component: PageNotFoundComponent}
 ];

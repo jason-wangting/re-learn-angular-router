@@ -8,22 +8,24 @@ import { CrisisDetailComponent }     from './crisis-detail/crisis-detail.compone
 
 // import { CanDeactivateGuard }             from '../can-deactivate.guard';
 import { CrisisDetailResolverService }    from './crisis-detail-resolver.service';
+import { AuthGuard } from '../auth/auth.guard';
 
 const crisisCenterRoutes: Routes = [
   {
-    path: '',
+    path: 'crisis-center',
     component: CrisisCenterComponent,
     children: [
       {
         path: '',
         component: CrisisListComponent,
+        canActivateChild: [AuthGuard],
         children: [
           {
             path: ':id',
             component: CrisisDetailComponent,
             // canDeactivate: [CanDeactivateGuard],
             resolve: {
-              crisis: CrisisDetailResolverService
+              // crisis: CrisisDetailResolverService
             }
           },
           {
